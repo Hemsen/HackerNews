@@ -8,19 +8,35 @@ const numberOfStories = [
 ];
 
 const StoriesContainer = () => {
-  const [stories, setStories] = useState([]);
+  const [allStories, setAllStories] = useState([]);
+  const [tenSortedStories, setTenSortedStories] = useState([]);
 
-  /* useEffect(() => {
-         if (stories.length === 0) {
-           fetch("https://hacker-news.firebaseio.com/v0/topstories.json")
-             .then((r) => console.log(r.status))
-             .then((data) => setStories((stories) => [...stories, data.json()]));
-         } else console.log(stories);
-       }, [stories]);*/
+  useEffect(() => {
+    if (allStories.length === 0) {
+      fetch("https://hacker-news.firebaseio.com/v0/topstories.json")
+        .then((response) => response.json())
+        .then((data) => setAllStories((stories) => [...stories, data]));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (allStories.length > 0) {
+      console.log(
+        allStories.sort(function (a, b) {
+          return a - b;
+        })
+      );
+      setTenSortedStories(
+        allStories.sort(function (a, b) {
+          return a - b;
+        })
+      );
+    }
+  }, [allStories]);
 
   return (
     <div className={"StoriesContainer"}>
-      {numberOfStories.map((story, index) => (
+      {tenSortedStories?.map((story, index) => (
         <StoryComponent storyID={story} key={index} />
       ))}
     </div>

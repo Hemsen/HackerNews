@@ -5,6 +5,12 @@ import Hacker from "./assets/WhiteHatHacker.heropng.png";
 const StoryComponent = ({ storyID }) => {
   const [story, setStory] = useState(null);
 
+  const calculateTimeStamp = (timeStamp) => {
+    let milliseconds = timeStamp * 1000;
+    let dateObject = new Date(milliseconds);
+    return dateObject.toLocaleString("en-GB");
+  };
+
   useEffect(() => {
     fetch(
       "https://hacker-news.firebaseio.com/v0/item/" +
@@ -18,10 +24,13 @@ const StoryComponent = ({ storyID }) => {
   return (
     <div className={"StoryContainer"}>
       <img src={Hacker} alt={"HackerImage"} className={"StoryImage"} />
-      <p>{story?.url}</p>
-      <p>Story Timestamp</p>
-      <h1>Story Title - Story Score</h1>
-      <p>Author ID - Author Score</p>
+      <a href={story?.url} target={"_blank"}>
+        {story?.url}
+      </a>
+      <p>{calculateTimeStamp(story?.time)}</p>
+      <h1>{story?.title + " - Story Score: " + story?.score}</h1>
+      <p>{"Written By: " + story?.by}</p>
+      <p>Author Score: </p>
     </div>
   );
 };
