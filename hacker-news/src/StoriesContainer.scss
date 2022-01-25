@@ -1,0 +1,10 @@
+$primary-color: #3cff00;
+$secondary-color: #2e2e2e;
+
+.StoriesContainer {
+  border-left: 2px solid $primary-color;
+  border-right: 2px solid $primary-color;
+  background: $secondary-color;
+  padding: 15px;
+  display: grid;
+}

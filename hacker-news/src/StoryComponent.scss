@@ -1,0 +1,22 @@
+$primary-color: #3cff00;
+$secondary-color: #0077ff;
+
+.StoryContainer {
+  border: 2px solid $primary-color;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 10px;
+  color: $primary-color;
+
+  &:hover {
+    transform: scale(1.01);
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+    text-shadow: 2px 2px $secondary-color;
+    border: 4px solid $secondary-color;
+  }
+}
+
+.StoryImage {
+
+}
