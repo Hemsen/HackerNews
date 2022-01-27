@@ -1,21 +1,84 @@
 $primary-color: #3cff00;
-$secondary-color: #0077ff;
+$highlight-color: #0077ff;
 
-.StoryContainer {
+.story-container {
   border: 2px solid $primary-color;
   border-radius: 10px;
-  margin: 10px;
-  padding: 10px;
+  margin: 10px 3vw 10px 3vw;
+  padding: 20px;
   color: $primary-color;
 
   &:hover {
-    transform: scale(1.01);
+    transform: scale(1.005);
     transition: transform 0.2s ease-in-out;
-    text-shadow: 2px 2px $secondary-color;
-    border: 4px solid $secondary-color;
+    cursor: pointer;
+    text-shadow: 2px 2px $highlight-color;
+    border: 4px solid $highlight-color;
+    padding: 18px
   }
 }
 
-.StoryImage {
+.story-container-mobile {
+  color: $primary-color;
 
+  &:hover {
+    transform: scale(1.005);
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+    text-shadow: 2px 2px $highlight-color;
+  }
+}
+
+.container {
+  position: relative;
+  text-align: center;
+
+  .story-image {
+    max-width: 100%;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: -2vmax;
+  }
+}
+
+.score-overlay {
+  position: absolute;
+  top: -2vmax;
+  right: 0;
+  background: black;
+  border: 2px solid $primary-color;
+  border-radius: 0 10px 0;
+  padding: 1vmin;
+  font-size: 2vmax;
+}
+
+
+.story-text {
+  a {
+    color: aqua;
+    font-size: 2.5vmin;
+  }
+
+  p {
+    font-size: 3.5vmin;
+  }
+
+  h1 {
+    font-size: 4.5vmin;
+  }
+
+  hr {
+    border: 1px solid $primary-color;
+    background: $primary-color;
+    margin-bottom: 3vmin;
+  }
+
+  .date-text {
+    font-size: 2.5vmin;
+    margin-top: -0.1vmin;
+  }
+
+  .author-text {
+    margin-bottom: -3vmin;
+  }
 }

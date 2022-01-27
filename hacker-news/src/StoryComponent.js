@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./StoryComponent.scss";
 import Hacker from "./assets/WhiteHatHacker.heropng.png";
+import useWindowSize from "./utils/UseWindowDimensions";
 
-const StoryComponent = ({ storyID }) => {
-  const [story, setStory] = useState(null);
+const StoryComponent = ({ story }) => {
+  const [authorScore, setAuthorScore] = useState("...");
+  const { width } = useWindowSize();
 
   const calculateTimeStamp = (timeStamp) => {
     let milliseconds = timeStamp * 1000;
@@ -13,24 +15,38 @@ const StoryComponent = ({ storyID }) => {
 
   useEffect(() => {
     fetch(
-      "https://hacker-news.firebaseio.com/v0/item/" +
-        storyID +
+      "https://hacker-news.firebaseio.com/v0/user/" +
+        story?.by +
         ".json?print=pretty"
     )
       .then((response) => response.json())
-      .then((data) => setStory(data));
-  }, [storyID]);
+      .then((data) => setAuthorScore(data.karma));
+  }, [story?.by]);
 
   return (
-    <div className={"StoryContainer"}>
-      <img src={Hacker} alt={"HackerImage"} className={"StoryImage"} />
-      <a href={story?.url} target={"_blank"}>
-        {story?.url}
-      </a>
-      <p>{calculateTimeStamp(story?.time)}</p>
-      <h1>{story?.title + " - Story Score: " + story?.score}</h1>
-      <p>{"Written By: " + story?.by}</p>
-      <p>Author Score: </p>
+    <div
+      className={width > 600 ? "story-container" : "story-container-mobile"}
+      onClick={() => window.open(story?.url)}
+    >
+      <div className={"container"}>
+        <img src={Hacker} alt={"HackerImage"} className={"story-image"} />
+        <h3 className={"score-overlay"}>{"STORY SCORE: " + story?.score}</h3>
+      </div>
+      <br />
+      <div className={"story-text"}>
+        <a href={story?.url} target={"_blank"} className={"StoryLink"}>
+          {story?.url}
+        </a>
+        <p className={"date-text"}>{calculateTimeStamp(story?.time)}</p>
+        <h1>{story?.title}</h1>
+        <p className={"author-text"}>
+          Written By:&nbsp;<b>{story?.by}</b>
+        </p>
+        <p>
+          Author Score:&nbsp;<b>{authorScore}</b>
+        </p>
+        {width < 600 ? <hr /> : null}
+      </div>
     </div>
   );
 };
