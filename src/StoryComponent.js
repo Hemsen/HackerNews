@@ -20,7 +20,8 @@ const StoryComponent = ({ story }) => {
         ".json?print=pretty"
     )
       .then((response) => response.json())
-      .then((data) => setAuthorScore(data.karma));
+      .then((data) => setAuthorScore(data.karma))
+        .catch((e) => window.alert("Author Score for " + story?.by + " could not be fetched right now. ERROR: " + e));
   }, [story?.by]);
 
   return (
@@ -34,7 +35,7 @@ const StoryComponent = ({ story }) => {
       </div>
       <br />
       <div className={"story-text"}>
-        <a href={story?.url} target={"_blank"} className={"StoryLink"}>
+        <a href={story?.url} target={"_blank"} rel="noreferrer" className={"StoryLink"}>
           {story?.url}
         </a>
         <p className={"date-text"}>{calculateTimeStamp(story?.time)}</p>

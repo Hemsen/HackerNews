@@ -7,4 +7,16 @@ $secondary-color: #2e2e2e;
   background: $secondary-color;
   padding: 15px;
   display: grid;
+  min-height: 100vh;
+}
+
+.story-skeleton {
+  position: relative;
+  background: url("https://cutewallpaper.org/25/animated-gif-matrix-falling-code-wallpaper/46-008ca-moving-a83d9-binary-e5f80-code-90dda-wallpaper-1fe83-on-1d90e-wallpapersafari.gif");
+  border: 2px solid $primary-color;
+  border-radius: 10px;
+  margin: 10px 3vw 10px 3vw;
+  padding: 20px;
+  width: available;
+  height: available;
 }
